@@ -8,23 +8,16 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BeatmapDataV2(
-    @SerialName("_version")
-    val version: String = "2.2.0",
-    @SerialName("_events")
-    val events: MutableList<BeatmapEventV2>,
-    @SerialName("_notes")
-    val notes: MutableList<BeatmapNoteV2>,
-    @SerialName("_obstacles")
-    val obstacles: MutableList<BeatmapObstacleV2>,
-    @SerialName("_waypoints")
-    val waypoints: MutableList<BeatmapWaypointV2>,
-    @SerialName("_customData")
-    override var customData: CustomData
+    @SerialName("_version") val version: String = "2.2.0",
+    @SerialName("_events") val events: MutableList<BeatmapEventV2>,
+    @SerialName("_notes") val notes: MutableList<BeatmapNoteV2>,
+    @SerialName("_obstacles") val obstacles: MutableList<BeatmapObstacleV2>,
+    @SerialName("_waypoints") val waypoints: MutableList<BeatmapWaypointV2>,
+    @SerialName("_customData") override var customData: CustomData
 ) : IBeatmapData {
 
 
     override fun add(item: IBeatmapDataItem) {
-
         when (item) {
             is BeatmapEventV2 -> {
                 events.add(item)
@@ -33,22 +26,53 @@ data class BeatmapDataV2(
             is BeatmapNoteV2 -> {
                 notes.add(item)
             }
+
+            is BeatmapObstacleV2 -> {
+                obstacles.add(item)
+            }
+
+            is BeatmapWaypointV2 -> {
+                waypoints.add(item)
+            }
         }
     }
 
     override fun remove(item: IBeatmapDataItem) {
-        TODO("Not yet implemented")
+        when (item) {
+            is BeatmapEventV2 -> {
+                events.remove(item)
+            }
+
+            is BeatmapNoteV2 -> {
+                notes.remove(item)
+            }
+
+            is BeatmapObstacleV2 -> {
+                obstacles.remove(item)
+            }
+
+            is BeatmapWaypointV2 -> {
+                waypoints.remove(item)
+            }
+        }
     }
 
     override fun getAllBeatmapItems(): Sequence<IBeatmapDataItem> {
-        TODO("Not yet implemented")
+        return sequenceOf(events, notes, obstacles, waypoints).flatten().sortedBy { it.time }
     }
 
     override fun <T : IBeatmapDataItem> getBeatmapItems(): Sequence<T> {
-        TODO("Not yet implemented")
+        return getAllBeatmapItems().mapNotNull { it as? T}
     }
 
     override fun getCopy(): IBeatmapData {
-        TODO("Not yet implemented")
+        return BeatmapDataV2(
+            version = version,
+            events = events.toMutableList(),
+            notes = notes.toMutableList(),
+            obstacles = obstacles.toMutableList(),
+            waypoints = waypoints.toMutableList(),
+            customData = customData.toMap()
+        )
     }
 }
