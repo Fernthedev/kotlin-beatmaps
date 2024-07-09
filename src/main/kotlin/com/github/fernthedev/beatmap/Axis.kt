@@ -1,5 +1,7 @@
 package com.github.fernthedev.beatmap
 
-
-
-interface IBombNote : IBeatmapObject
+enum class Axis {
+    X,
+    Y,
+    Z
+}

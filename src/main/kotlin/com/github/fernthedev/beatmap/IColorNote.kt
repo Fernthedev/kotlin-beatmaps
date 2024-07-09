@@ -26,15 +26,4 @@ interface IColorNote : IBeatmapObject {
     val colorType: ColorType
     val cutDirection: NoteCutDirection
     val cutDirectionAngleOffset: Float
-
-    fun copy(
-        time: Float = this.time,
-        customData: CustomData = this.customData,
-
-        colorType: ColorType = this.colorType,
-        cutDirection: NoteCutDirection = this.cutDirection,
-        lineIndex: Int = this.lineIndex,
-        noteLineLayer: Int = this.noteLineLayer,
-        cutDirectionAngleOffset: Float = this.cutDirectionAngleOffset,
-    ): IColorNote
 }

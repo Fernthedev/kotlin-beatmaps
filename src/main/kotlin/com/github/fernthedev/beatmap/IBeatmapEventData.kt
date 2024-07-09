@@ -1,6 +1,6 @@
 package com.github.fernthedev.beatmap
 
-enum class BasicBeatmapEventType(val value: Int) {
+enum class BeatmapEventType(val value: Int) {
     Event0(0),
     Event1(1),
     Event2(2),
@@ -32,17 +32,8 @@ enum class BasicBeatmapEventType(val value: Int) {
 }
 
 
-interface IBeatmapEventData : ICustomBeatmapDataItem {
-    val basicBeatmapEventType: BasicBeatmapEventType
+interface IBeatmapEventData : ICustomBeatmapDataItem, Cloneable {
+    val beatmapEventType: BeatmapEventType
     val value: Int
     val floatValue: Float
-
-    fun copy(
-        time: Float = this.time,
-        customData: CustomData = this.customData,
-
-        basicBeatmapEventType: BasicBeatmapEventType = this.basicBeatmapEventType,
-        floatValue: Float = this.floatValue,
-        value: Int = this.value
-    ): IBeatmapEventData
 }

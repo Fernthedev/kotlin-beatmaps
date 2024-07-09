@@ -1,6 +1,6 @@
 package com.github.fernthedev.beatmap.impl.v2
 
-import com.github.fernthedev.beatmap.BasicBeatmapEventType
+import com.github.fernthedev.beatmap.BeatmapEventType
 import com.github.fernthedev.beatmap.CustomData
 import com.github.fernthedev.beatmap.IBeatmapEventData
 import kotlinx.serialization.SerialName
@@ -11,7 +11,7 @@ data class BeatmapEventV2(
     @SerialName("_time")
     override val time: Float = 0.0F,
     @SerialName("_type")
-    override val basicBeatmapEventType: BasicBeatmapEventType = BasicBeatmapEventType.Event0,
+    override val beatmapEventType: BeatmapEventType = BeatmapEventType.Event0,
     @SerialName("_value")
     override val value: Int = 0,
     @SerialName("_floatValue")
@@ -22,13 +22,13 @@ data class BeatmapEventV2(
     override fun copy(
         time: Float,
         customData: CustomData,
-        basicBeatmapEventType: BasicBeatmapEventType,
+        beatmapEventType: BeatmapEventType,
         floatValue: Float,
         value: Int
     ): BeatmapEventV2 {
         return BeatmapEventV2(
             time = time,
-            basicBeatmapEventType = basicBeatmapEventType,
+            beatmapEventType = beatmapEventType,
             value = value,
             floatValue = floatValue,
             customData = customData,
