@@ -8,9 +8,8 @@ import com.github.fernthedev.beatmap.impl.v4.BeatmapDataV4
 import kotlinx.serialization.json.Json
 
 class BeatmapLoader : IBeatmapLoader {
-    val jsonParser = Json {
+    private val jsonParser = Json {
         ignoreUnknownKeys = true
-        isLenient = true
     }
 
     override fun loadBeatmap(readable: String): IBeatmapData {
