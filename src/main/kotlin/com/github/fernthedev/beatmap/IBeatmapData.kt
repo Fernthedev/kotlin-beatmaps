@@ -7,7 +7,7 @@ interface IReadonlyBeatmapData {
     fun getAllBeatmapItems(): Sequence<IBeatmapDataItem>
 
     fun <T : IBeatmapDataItem> getBeatmapItems(clazz: Class<T>): Sequence<T> {
-        return getAllBeatmapItems().filter { it.javaClass.isAssignableFrom(clazz) }.mapNotNull { it as? T }
+        return getAllBeatmapItems().filter { clazz.isAssignableFrom(it.javaClass) }.mapNotNull { it as? T }
     }
 
     fun getCopy(): IBeatmapData
