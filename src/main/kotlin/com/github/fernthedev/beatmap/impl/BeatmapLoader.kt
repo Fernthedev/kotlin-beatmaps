@@ -4,7 +4,7 @@ import com.github.fernthedev.beatmap.IBeatmapData
 import com.github.fernthedev.beatmap.IBeatmapLoader
 import com.github.fernthedev.beatmap.impl.v2.BeatmapDataV2
 import com.github.fernthedev.beatmap.impl.v3.BeatmapDataV3
-import com.github.fernthedev.beatmap.impl.v3.BeatmapDataV4
+import com.github.fernthedev.beatmap.impl.v4.BeatmapDataV4
 import kotlinx.serialization.json.Json
 
 class BeatmapLoader : IBeatmapLoader {
