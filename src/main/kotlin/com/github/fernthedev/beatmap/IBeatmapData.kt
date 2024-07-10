@@ -6,8 +6,8 @@ interface IReadonlyBeatmapData {
 
     fun getAllBeatmapItems(): Sequence<IBeatmapDataItem>
 
-    fun <T : IBeatmapDataItem> getBeatmapItems(): Sequence<T> {
-        return getAllBeatmapItems().mapNotNull { it as? T }
+    fun <T : IBeatmapDataItem> getBeatmapItems(clazz: Class<T>): Sequence<T> {
+        return getAllBeatmapItems().filter { it.javaClass.isAssignableFrom(clazz) }.mapNotNull { it as? T }
     }
 
     fun getCopy(): IBeatmapData
@@ -20,4 +20,8 @@ interface IBeatmapData : IReadonlyBeatmapData {
 
     fun remove(item: IBeatmapDataItem)
 
+}
+
+inline fun <reified T : IBeatmapDataItem> IReadonlyBeatmapData.getBeatmapItems(): Sequence<T> {
+    return getBeatmapItems(T::class.java)
 }
