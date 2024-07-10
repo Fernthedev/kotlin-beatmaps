@@ -1,16 +1,20 @@
 package com.github.fernthedev.beatmap.impl.v3.event_box
 
 import com.github.fernthedev.beatmap.EaseType
+import com.github.fernthedev.beatmap.IBeatmapDataItem
+import com.github.fernthedev.beatmap.impl.v3.ConstantsV3
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class FxEventBoxGroupV3(
-    val type: FxEventType,
+    @SerialName(ConstantsV3.BEAT_KEY)
     override val time: Float,
-    override val eventBoxes: MutableList<FxEventBox>
-
-) : EventBoxGroup<FxEventBox>(time, eventBoxes)
+    @SerialName("e")
+    val eventBoxes: MutableList<FxEventBox>,
+    @SerialName("t")
+    val type: FxEventType
+) : IBeatmapDataItem
 
 @Serializable
 data class FxEventBox(
