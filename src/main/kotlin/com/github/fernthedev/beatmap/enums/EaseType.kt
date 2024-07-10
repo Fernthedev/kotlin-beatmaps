@@ -1,6 +1,12 @@
-package com.github.fernthedev.beatmap
+package com.github.fernthedev.beatmap.enums
 
-enum class EaseType(val value: Int) {
+import com.github.fernthedev.beatmap.IntEnum
+import com.github.fernthedev.beatmap.IntEnumSerializer
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+
+@Serializable(with = EaseTypeSerializer::class)
+enum class EaseType(override val value: Int) : IntEnum {
     None(-1),
     Linear(0),
     InQuad(1),
@@ -37,10 +43,9 @@ enum class EaseType(val value: Int) {
     BeatSaberInOutElastic(101),
     BeatSaberInOutBounce(102);
 
-    companion object {
-        private val map = entries.associateBy(EaseType::value)
-        fun fromValue(value: Int) = map[value]
+    companion object : IntEnum.Factory<EaseType> {
+        override fun fromValue(value: Int): EaseType = entries.first { it.value == value }
     }
 }
 
-
+object EaseTypeSerializer : KSerializer<EaseType> by IntEnumSerializer.create(EaseType)

@@ -1,6 +1,7 @@
 package com.github.fernthedev.beatmap.impl.v3
 
 import com.github.fernthedev.beatmap.*
+import com.github.fernthedev.beatmap.enums.ExecutionTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

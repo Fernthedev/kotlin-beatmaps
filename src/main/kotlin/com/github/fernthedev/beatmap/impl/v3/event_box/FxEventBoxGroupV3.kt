@@ -1,6 +1,6 @@
 package com.github.fernthedev.beatmap.impl.v3.event_box
 
-import com.github.fernthedev.beatmap.EaseType
+import com.github.fernthedev.beatmap.enums.EaseType
 import com.github.fernthedev.beatmap.IBeatmapDataItem
 import com.github.fernthedev.beatmap.impl.v3.ConstantsV3
 import kotlinx.serialization.SerialName

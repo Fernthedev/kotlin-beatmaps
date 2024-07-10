@@ -1,7 +1,7 @@
 package com.github.fernthedev.beatmap.impl.v3.event_box
 
-import com.github.fernthedev.beatmap.Axis
-import com.github.fernthedev.beatmap.EaseType
+import com.github.fernthedev.beatmap.enums.Axis
+import com.github.fernthedev.beatmap.enums.EaseType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

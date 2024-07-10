@@ -13,6 +13,7 @@ data class BeatmapDataV2(
     @SerialName("_notes") val notes: MutableList<NoteDataV2> = mutableListOf(),
     @SerialName("_obstacles") val obstacles: MutableList<ObstacleDataV2> = mutableListOf(),
     @SerialName("_waypoints") val waypoints: MutableList<BeatmapWaypointV2> = mutableListOf(),
+    @Serializable
     @SerialName("_customData") override var customData: CustomData = mapOf()
 ) : IBeatmapData {
 

@@ -1,6 +1,10 @@
 package com.github.fernthedev.beatmap
 
-enum class BeatmapEventType(val value: Int) {
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+
+@Serializable(with = BeatmapEventTypeSerializer::class)
+enum class BeatmapEventType(override val value: Int) : IntEnum {
     Event0(0),
     Event1(1),
     Event2(2),
@@ -28,9 +32,17 @@ enum class BeatmapEventType(val value: Int) {
     Special1(41),
     Special2(42),
     Special3(43),
-    BpmChange(100)
+    BpmChange(100);
+
+    companion object : IntEnum.Factory<BeatmapEventType> {
+        override fun fromValue(value: Int): BeatmapEventType {
+            return entries.first { it.value == value }
+        }
+    }
 }
 
+
+object BeatmapEventTypeSerializer : KSerializer<BeatmapEventType> by IntEnumSerializer.create(BeatmapEventType)
 
 interface IBeatmapEventData : ICustomBeatmapDataItem, Cloneable {
     val beatmapEventType: BeatmapEventType

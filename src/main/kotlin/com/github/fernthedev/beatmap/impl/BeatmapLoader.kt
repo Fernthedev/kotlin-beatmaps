@@ -8,20 +8,25 @@ import com.github.fernthedev.beatmap.impl.v4.BeatmapDataV4
 import kotlinx.serialization.json.Json
 
 class BeatmapLoader : IBeatmapLoader {
+    val jsonParser = Json {
+        ignoreUnknownKeys = true
+        isLenient = true
+    }
+
     override fun loadBeatmap(readable: String): IBeatmapData {
-        val versionData = Json.decodeFromString<VersionData>(readable)
+        val versionData = jsonParser.decodeFromString<VersionData>(readable)
         val versionStr = versionData._version ?: versionData.version
 
         if (versionStr == null || versionStr.startsWith("2.")) {
-            return Json.decodeFromString<BeatmapDataV2>(readable)
+            return jsonParser.decodeFromString<BeatmapDataV2>(readable)
         }
 
         if (versionStr.startsWith("3.")) {
-            return Json.decodeFromString<BeatmapDataV3>(readable)
+            return jsonParser.decodeFromString<BeatmapDataV3>(readable)
         }
 
         if (versionStr.startsWith("4.")) {
-            return Json.decodeFromString<BeatmapDataV4>(readable)
+            return jsonParser.decodeFromString<BeatmapDataV4>(readable)
         }
 
         throw IllegalArgumentException("Not a valid beatmap format: $versionStr")
