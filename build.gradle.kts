@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "2.0.0"
     kotlin("plugin.serialization") version "2.0.0"
+    `maven-publish`
 }
 
 group = "com.github.fernthedev"
@@ -21,3 +22,14 @@ tasks.test {
 kotlin {
     jvmToolchain(17)
 }
+
+
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["kotlin"])
+        }
+    }
+}
+
