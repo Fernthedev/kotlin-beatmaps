@@ -2,6 +2,7 @@ plugins {
     kotlin("jvm") version "2.0.0"
     kotlin("plugin.serialization") version "2.0.0"
     `maven-publish`
+    id("maven")
 }
 
 group = "com.github.fernthedev"
@@ -32,3 +33,14 @@ java {
 
 
 
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.group.toString()
+            artifactId = "kotlin-beatmaps"
+            version = project.version.toString()
+
+            from(components["java"])
+        }
+    }
+}
