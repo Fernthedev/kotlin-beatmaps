@@ -3,7 +3,7 @@ package com.github.fernthedev.beatmap.impl.v3
 import com.github.fernthedev.beatmap.CustomData
 import com.github.fernthedev.beatmap.IBeatmapData
 import com.github.fernthedev.beatmap.IBeatmapDataItem
-import com.github.fernthedev.beatmap.impl.v3.events.*
+import com.github.fernthedev.beatmap.impl.v3.event_box.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -27,7 +27,7 @@ data class BeatmapDataV3(
     @SerialName("sliders")
     val sliders: MutableList<SliderDataV3> = mutableListOf(),
     @SerialName("burstSliders")
-    val burstSliders: MutableList<SliderDataV3> = mutableListOf(),
+    val burstSliders: MutableList<BurstSliderDataV3> = mutableListOf(),
     @SerialName("waypoints")
     val waypoints: MutableList<WaypointDataV3> = mutableListOf(),
     @SerialName("basicBeatmapEvents")
@@ -49,23 +49,126 @@ data class BeatmapDataV3(
     @SerialName("useNormalEventsAsCompatibleEvents")
     val useNormalEventsAsCompatibleEvents: Boolean,
 ) : IBeatmapData {
+
     override fun add(item: IBeatmapDataItem) {
-        TODO("Not yet implemented")
+        when (item) {
+            is BasicEventDataV3 -> {
+                basicBeatmapEvents.add(item)
+            }
+            is BpmChangeEventDataV3 -> {
+                bpmEvents.add(item)
+            }
+            is RotationEventDataV3 -> {
+                rotationEvents.add(item)
+            }
+
+            is ColorNoteDataV3 -> {
+                colorNotes.add(item)
+            }
+
+            is BombNoteDataV3 -> {
+                bombNotes.add(item)
+            }
+            is SliderDataV3 -> {
+                sliders.add(item)
+            }
+            is BurstSliderDataV3 -> {
+                burstSliders.add(item)
+            }
+
+            is ObstacleDataV3 -> {
+                obstacles.add(item)
+            }
+            is ColorBoostEventDataV3 -> {
+                colorBoostBeatmapEvents.add(item)
+            }
+
+            is WaypointDataV3 -> {
+                waypoints.add(item)
+            }
+        }
     }
 
     override fun remove(item: IBeatmapDataItem) {
-        TODO("Not yet implemented")
+        when (item) {
+            is BasicEventDataV3 -> {
+                basicBeatmapEvents.remove(item)
+            }   
+            is BpmChangeEventDataV3 -> {
+                bpmEvents.remove(item)
+            }
+            is RotationEventDataV3 -> {
+                rotationEvents.remove(item)
+            }
+
+            is ColorNoteDataV3 -> {
+                colorNotes.remove(item)
+            }
+
+            is BombNoteDataV3 -> {
+                bombNotes.remove(item)
+            }
+            is SliderDataV3 -> {
+                sliders.remove(item)
+            }
+            is BurstSliderDataV3 -> {
+                burstSliders.remove(item)
+            }
+
+            is ObstacleDataV3 -> {
+                obstacles.remove(item)
+            }     
+            is ColorBoostEventDataV3 -> {
+                colorBoostBeatmapEvents.remove(item)
+            }
+
+            is WaypointDataV3 -> {
+                waypoints.remove(item)
+            }
+        }
     }
 
     override fun getAllBeatmapItems(): Sequence<IBeatmapDataItem> {
-        TODO("Not yet implemented")
+        return sequenceOf(
+            colorNotes,
+            bombNotes,
+            obstacles,
+            sliders,
+            burstSliders,
+            bpmEvents,
+            rotationEvents,
+            basicBeatmapEvents,
+            colorBoostBeatmapEvents,
+            lightColorEventBoxGroups,
+            lightRotationEventBoxGroups,
+            lightTranslationEventBoxGroups,
+            vfxEventBoxGroups,
+        ).flatten().sortedBy { it.time }
     }
 
-    override fun <T : IBeatmapDataItem> getBeatmapItems(): Sequence<T> {
-        TODO("Not yet implemented")
-    }
+
 
     override fun getCopy(): IBeatmapData {
-        TODO("Not yet implemented")
+        return BeatmapDataV3(
+            version = version,
+            customData = customData.toMap(),
+            bpmEvents = bpmEvents.toMutableList(),
+            rotationEvents = rotationEvents.toMutableList(),
+            lightTranslationEventBoxGroups = lightTranslationEventBoxGroups.toMutableList(),
+            lightRotationEventBoxGroups = lightRotationEventBoxGroups.toMutableList(),
+            lightColorEventBoxGroups = lightColorEventBoxGroups.toMutableList(),
+            vfxEventBoxGroups = vfxEventBoxGroups.toMutableList(),
+            basicBeatmapEvents = basicBeatmapEvents.toMutableList(),
+            useNormalEventsAsCompatibleEvents = useNormalEventsAsCompatibleEvents,
+            sliders = sliders.toMutableList(),
+            burstSliders = burstSliders.toMutableList(),
+            obstacles = obstacles.toMutableList(),
+            bombNotes = bombNotes.toMutableList(),
+            waypoints = waypoints.toMutableList(),
+            basicEventTypesWithKeywords = basicEventTypesWithKeywords.copy(),
+            colorBoostBeatmapEvents = colorBoostBeatmapEvents.toMutableList(),
+            colorNotes = colorNotes.toMutableList(),
+            fxEventsCollection = fxEventsCollection.copy()
+        )
     }
 }

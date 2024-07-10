@@ -1,4 +1,4 @@
-package com.github.fernthedev.beatmap.impl.v3.events
+package com.github.fernthedev.beatmap.impl.v3.event_box
 
 import com.github.fernthedev.beatmap.EaseType
 import com.github.fernthedev.beatmap.EnvironmentColorType

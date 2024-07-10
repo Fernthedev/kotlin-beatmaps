@@ -7,7 +7,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BeatmapEventV2(
+data class EventDataV2(
     @SerialName("_time")
     override val time: Float = 0.0F,
     @SerialName("_type")
@@ -19,19 +19,5 @@ data class BeatmapEventV2(
     @SerialName("_customData")
     override val customData: CustomData = mapOf()
 ) : IBeatmapEventData {
-    override fun copy(
-        time: Float,
-        customData: CustomData,
-        beatmapEventType: BeatmapEventType,
-        floatValue: Float,
-        value: Int
-    ): BeatmapEventV2 {
-        return BeatmapEventV2(
-            time = time,
-            beatmapEventType = beatmapEventType,
-            value = value,
-            floatValue = floatValue,
-            customData = customData,
-        )
-    }
+
 }

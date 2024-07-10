@@ -18,21 +18,4 @@ data class BeatmapWaypointV2(
     override val noteLineLayer: Int,
     @SerialName("_customData")
     override val customData: CustomData
-) : IWaypoint {
-    override fun copy(
-        time: Float,
-        customData: CustomData,
-        lineIndex: Int,
-        noteLineLayer: Int,
-        offsetDirection: OffsetDirection
-    ): BeatmapWaypointV2 {
-        return BeatmapWaypointV2(
-            time = time,
-            offsetDirection = offsetDirection,
-            lineIndex = lineIndex,
-            noteLineLayer = noteLineLayer,
-            customData = customData
-        )
-    }
-
-}
+) : IWaypoint

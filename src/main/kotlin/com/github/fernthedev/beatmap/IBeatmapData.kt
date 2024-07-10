@@ -6,7 +6,9 @@ interface IReadonlyBeatmapData {
 
     fun getAllBeatmapItems(): Sequence<IBeatmapDataItem>
 
-    fun <T: IBeatmapDataItem> getBeatmapItems(): Sequence<T>
+    fun <T : IBeatmapDataItem> getBeatmapItems(): Sequence<T> {
+        return getAllBeatmapItems().mapNotNull { it as? T }
+    }
 
     fun getCopy(): IBeatmapData
 

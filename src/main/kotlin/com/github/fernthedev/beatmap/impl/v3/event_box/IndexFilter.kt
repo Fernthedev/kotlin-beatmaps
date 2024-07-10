@@ -1,4 +1,4 @@
-package com.github.fernthedev.beatmap.impl.v3.events
+package com.github.fernthedev.beatmap.impl.v3.event_box
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
