@@ -9,11 +9,11 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class BeatmapDataV2(
     @SerialName("_version") val version: String = "2.2.0",
-    @SerialName("_events") val events: MutableList<EventDataV2>,
-    @SerialName("_notes") val notes: MutableList<NoteDataV2>,
-    @SerialName("_obstacles") val obstacles: MutableList<ObstacleDataV2>,
-    @SerialName("_waypoints") val waypoints: MutableList<BeatmapWaypointV2>,
-    @SerialName("_customData") override var customData: CustomData
+    @SerialName("_events") val events: MutableList<EventDataV2> = mutableListOf(),
+    @SerialName("_notes") val notes: MutableList<NoteDataV2> = mutableListOf(),
+    @SerialName("_obstacles") val obstacles: MutableList<ObstacleDataV2> = mutableListOf(),
+    @SerialName("_waypoints") val waypoints: MutableList<BeatmapWaypointV2> = mutableListOf(),
+    @SerialName("_customData") override var customData: CustomData = mapOf()
 ) : IBeatmapData {
 
 
@@ -61,7 +61,7 @@ data class BeatmapDataV2(
         return sequenceOf(events, notes, obstacles, waypoints).flatten().sortedBy { it.time }
     }
 
-    override fun getCopy(): IBeatmapData {
+    override fun getCopy(): BeatmapDataV2 {
         return BeatmapDataV2(
             version = version,
             events = events.toMutableList(),
