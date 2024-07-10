@@ -27,11 +27,13 @@ class BeatmapLoaderTest {
 
     @Test
     fun loadBeatmapV2() {
-        val files = getResourceFiles("/v2/")
+        val files = getResourceFiles("v2")
 
         files.forEach { file ->
+
+            println("Loading $file")
             val fileText =
-                loadResourceText(file) ?: throw IllegalArgumentException("File $file not found in resources!")
+                loadResourceText("v2/${file}") ?: throw IllegalArgumentException("File $file not found in resources!")
 
             val beatmap = assertDoesNotThrow {
                 beatmapLoader.loadBeatmap(fileText)
@@ -56,11 +58,13 @@ class BeatmapLoaderTest {
 
     @Test
     fun loadBeatmapV3() {
-        val files = getResourceFiles("/v2/")
+        val files = getResourceFiles("v3")
 
         files.forEach { file ->
+            println("Loading $file")
+
             val fileText =
-                loadResourceText(file) ?: throw IllegalArgumentException("File $file not found in resources!")
+                loadResourceText("v3/${file}") ?: throw IllegalArgumentException("File $file not found in resources!")
 
             val beatmap = assertDoesNotThrow {
                 beatmapLoader.loadBeatmap(fileText)
