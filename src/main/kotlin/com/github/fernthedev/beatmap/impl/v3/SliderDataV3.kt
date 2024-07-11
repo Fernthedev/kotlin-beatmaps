@@ -8,36 +8,36 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class BurstSliderDataV3(
     // common
-    @SerialName(ConstantsV3.BEAT_KEY) override val time: Float,
-    @SerialName(ConstantsV3.CUSTOM_DATA_KEY) override val customData: CustomData,
-    @SerialName(ConstantsV3.LINE_INDEX) override val headLineIndex: Int,
-    @SerialName(ConstantsV3.LINE_LAYER) override val headLineLayer: Int,
-    @SerialName("c") override val colorType: ColorType,
-    @SerialName("d") override val headCutDirection: NoteCutDirection,
-    @SerialName("tb") override val tailTime: Float,
-    @SerialName("tx") override val tailLineIndex: Int,
-    @SerialName("ty") override val tailLineLayer: Int,
+    @SerialName(ConstantsV3.BEAT_KEY) override val time: Float = 0F,
+    @SerialName(ConstantsV3.CUSTOM_DATA_KEY) override val customData: CustomData = mapOf(),
+    @SerialName(ConstantsV3.LINE_INDEX) override val headLineIndex: Int = 0,
+    @SerialName(ConstantsV3.LINE_LAYER) override val headLineLayer: Int = 0,
+    @SerialName("c") override val colorType: ColorType = ColorType.ColorA,
+    @SerialName("d") override val headCutDirection: NoteCutDirection = NoteCutDirection.None,
+    @SerialName("tb") override val tailTime: Float = 0F,
+    @SerialName("tx") override val tailLineIndex: Int = 0,
+    @SerialName("ty") override val tailLineLayer: Int = 0,
     // burst
-    @SerialName("sc") val sliceCount: Int,
-    @SerialName("s") val squishAmount: Float,
+    @SerialName("sc") val sliceCount: Int = 0,
+    @SerialName("s") val squishAmount: Float =0F,
 ) : ISlider, Cloneable
 
 @Serializable
 data class SliderDataV3(
     // common
-    @SerialName(ConstantsV3.BEAT_KEY) override val time: Float,
-    @SerialName(ConstantsV3.CUSTOM_DATA_KEY) override val customData: CustomData,
-    @SerialName(ConstantsV3.LINE_INDEX) override val headLineIndex: Int,
-    @SerialName(ConstantsV3.LINE_LAYER) override val headLineLayer: Int,
-    @SerialName("c") override val colorType: ColorType,
-    @SerialName("d") override val headCutDirection: NoteCutDirection,
-    @SerialName("tb") override val tailTime: Float,
-    @SerialName("tx") override val tailLineIndex: Int,
-    @SerialName("ty") override val tailLineLayer: Int,
+    @SerialName(ConstantsV3.BEAT_KEY) override val time: Float = 0F,
+    @SerialName(ConstantsV3.CUSTOM_DATA_KEY) override val customData: CustomData = mapOf(),
+    @SerialName(ConstantsV3.LINE_INDEX) override val headLineIndex: Int = 0,
+    @SerialName(ConstantsV3.LINE_LAYER) override val headLineLayer: Int = 0,
+    @SerialName("c") override val colorType: ColorType = ColorType.ColorA,
+    @SerialName("d") override val headCutDirection: NoteCutDirection = NoteCutDirection.None,
+    @SerialName("tb") override val tailTime: Float = 0F,
+    @SerialName("tx") override val tailLineIndex: Int = 0,
+    @SerialName("ty") override val tailLineLayer: Int = 0,
 
     // slider
-    @SerialName("mu") val headControlPointLengthMultiplier: Float,
-    @SerialName("tmu") val tailControlPointLengthMultiplier: Float,
-    @SerialName("tc") val tailCutDirection: NoteCutDirection,
-    @SerialName("m") val sliderMidAnchorMode: SliderMidAnchorMode
+    @SerialName("mu") val headControlPointLengthMultiplier: Float = 0F,
+    @SerialName("tmu") val tailControlPointLengthMultiplier: Float = 0F,
+    @SerialName("tc") val tailCutDirection: NoteCutDirection = NoteCutDirection.None,
+    @SerialName("m") val sliderMidAnchorMode: SliderMidAnchorMode = SliderMidAnchorMode.Straight,
 ) : ISlider, Cloneable
